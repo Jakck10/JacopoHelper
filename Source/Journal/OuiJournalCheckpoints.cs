@@ -29,7 +29,6 @@ public class OuiJournalCheckpoints : OuiJournalPage {
         MTexture polaroid = hasFrame ? MTN.Checkpoints["polaroid"] : null;
         MTexture img = MTN.Checkpoints.Has(cp.Image) ? MTN.Checkpoints[cp.Image] : null;
 
-        // scala della cornice: occupa ~85% della metà pagina, ma mai più del 55% dell'altezza
         float s = 0.75f;
         float frameHeight = 300f;
         if (hasFrame) {
@@ -39,13 +38,11 @@ public class OuiJournalCheckpoints : OuiJournalPage {
 
         Vector2 center = new Vector2(x, 80f + frameHeight / 2f) + cp.Offset;
 
-        // cornice (filtro normale)
         Draw.SpriteBatch.Begin();
         if (hasFrame)
             polaroid.DrawCentered(center, Color.White, s, cp.Rotation);
         Draw.SpriteBatch.End();
 
-        // anteprima con PointClamp, così i pixel restano nitidi (come in vanilla)
         if (img != null) {
             float imgScale = s * 720f / img.Width;
             Draw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp,
