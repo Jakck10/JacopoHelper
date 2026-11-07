@@ -9,7 +9,6 @@ public static class JournalData {
         AreaModeStats stats = SaveData.Instance.Areas[area.ID].Modes[(int) area.Mode];
         HashSet<string> found = SaveData.Instance.GetCheckpoints(area);
 
-        // indici dei checkpoint trovati (0 = inizio)
         var list = new List<CheckpointInfo>();
         var byIndex = new Dictionary<int, CheckpointInfo>();
 
@@ -39,7 +38,6 @@ public static class JournalData {
             byIndex[i] = info;
         }
 
-        // berry non tracciate: assegnate al checkpoint in base all'ordine delle stanze
         int cp = 0;
         foreach (LevelData level in mp.MapData.Levels) {
             for (int i = 0; i < mp.Checkpoints.Length; i++)

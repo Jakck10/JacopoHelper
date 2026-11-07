@@ -65,7 +65,6 @@ public static class InGameOverworldHelper {
         orig();
     }
 
-    // blocca i cambi di musica/ambiente mentre il journal è aperto
     private static bool OnSetMusic(On.Celeste.Audio.orig_SetMusic orig, string path, bool startPlaying, bool allowFadeOut) {
         if (path != null && overworldWrapper?.Scene == Engine.Scene)
             return false;
@@ -95,7 +94,6 @@ public static class InGameOverworldHelper {
 
     private static void OnOuiMainMenuCreateButtons(On.Celeste.OuiMainMenu.orig_CreateButtons orig, OuiMainMenu self) {
         orig(self);
-        Logger.Info("JacopoHelper", $"CreateButtons: Engine.Scene={Engine.Scene?.GetType().Name}");
 
         if (Engine.Scene is Overworld) {
             OuiHelper_EnterJournal.Start = false;

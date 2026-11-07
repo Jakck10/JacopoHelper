@@ -38,7 +38,6 @@ public class JacopoHelperModule : EverestModule {
     }
 
     private static void OnJournalEnter(OuiJournal journal, Oui from) {
-        Logger.Info("JacopoHelper", $"OnJournalEnter: OpenCustom={OpenCustom}, JournalArea={JournalArea}, pagine prima={journal.Pages.Count}");
         if (!OpenCustom) return;
 
         journal.Pages.Clear();
@@ -46,11 +45,9 @@ public class JacopoHelperModule : EverestModule {
 
         var area = JournalArea ?? global::Celeste.SaveData.Instance.LastArea;
         var list = JournalData.Build(area);
-        Logger.Info("JacopoHelper", $"Checkpoint trovati: {list.Count}");
         for (int i = 0; i < list.Count; i += 2)
             journal.Pages.Add(new OuiJournalCheckpoints(journal, list[i], i + 1 < list.Count ? list[i + 1] : null));
 
-        Logger.Info("JacopoHelper", $"pagine dopo={journal.Pages.Count}");
         OpenCustom = false;
     }
 }
