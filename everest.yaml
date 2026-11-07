@@ -1,0 +1,8 @@
+- Name: JacopoHelper
+  Version: 0.0.1
+  DLL: bin/JacopoHelper.dll
+  Dependencies:
+    - Name: Everest
+      Version: 1.5935.0
+    - Name: FrostHelper
+      Version: 1.80.0
