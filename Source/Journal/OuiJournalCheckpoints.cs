@@ -59,8 +59,8 @@ public class OuiJournalCheckpoints : OuiJournalPage {
         y += 120f;
 
         MTexture normal = GFX.Gui["collectables/strawberry"];
-        MTexture untracked = GFX.Gui.Has("JacopoHelper/untrackedberry")
-            ? GFX.Gui["JacopoHelper/untrackedberry"] : normal;
+        MTexture untracked = GFX.Gui.Has("JacopoHelper/coreberry")
+            ? GFX.Gui["JacopoHelper/coreberry"] : normal;
 
         float spacing = 53f;
         float startX = x - (cp.Berries.Count - 1) * spacing / 2f;

@@ -6,7 +6,8 @@ journalTrigger.placements = {
     name = "journalTrigger",
     data = {
         width = 8,
-        height = 8
+        height = 8,
+        onlyDiscoveredCheckpoints = true
     }
 }
 

@@ -5,6 +5,7 @@ namespace Celeste.Mod.JacopoHelper;
 public class JacopoHelperModule : EverestModule {
     public static bool OpenCustom;
     public static AreaKey? JournalArea;
+    public static bool OnlyDiscovered;
     public static JacopoHelperModule Instance { get; private set; }
 
     public override Type SettingsType => typeof(JacopoHelperModuleSettings);
@@ -44,7 +45,7 @@ public class JacopoHelperModule : EverestModule {
         journal.Pages.Add(new OuiJournalCover(journal));
 
         var area = JournalArea ?? global::Celeste.SaveData.Instance.LastArea;
-        var list = JournalData.Build(area);
+        var list = JournalData.Build(area, OnlyDiscovered);
         for (int i = 0; i < list.Count; i += 2)
             journal.Pages.Add(new OuiJournalCheckpoints(journal, list[i], i + 1 < list.Count ? list[i + 1] : null));
 

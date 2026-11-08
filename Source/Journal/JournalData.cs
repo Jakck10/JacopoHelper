@@ -4,7 +4,7 @@ using Monocle;
 namespace Celeste.Mod.JacopoHelper;
 
 public static class JournalData {
-    public static List<CheckpointInfo> Build(AreaKey area) {
+    public static List<CheckpointInfo> Build(AreaKey area, bool onlyDisc) {
         ModeProperties mp = AreaData.Areas[area.ID].Mode[(int) area.Mode];
         AreaModeStats stats = SaveData.Instance.Areas[area.ID].Modes[(int) area.Mode];
         HashSet<string> found = SaveData.Instance.GetCheckpoints(area);
@@ -14,7 +14,7 @@ public static class JournalData {
 
         for (int i = 0; i <= mp.Checkpoints.Length; i++) {
             string level = i == 0 ? null : mp.Checkpoints[i - 1].Level;
-            if (i > 0 && !found.Contains(level)) continue;
+            if (i > 0 && !found.Contains(level) && onlyDisc) continue;
 
             int num = i == 0 ? mp.StartStrawberries : mp.Checkpoints[i - 1].Strawberries;
             var info = new CheckpointInfo {
@@ -22,7 +22,7 @@ public static class JournalData {
                 Image = OuiChapterPanel.GetCheckpointPreviewName(area, level)
             };
 
-            int seed = 17;
+            int seed = 23;
             foreach (char c in info.Image) seed = seed * 31 + c;
             var rng = new System.Random(seed);
             info.Rotation = (rng.Next(2) == 0 ? -1 : 1) * (0.05f + (float) rng.NextDouble() * 0.15f);

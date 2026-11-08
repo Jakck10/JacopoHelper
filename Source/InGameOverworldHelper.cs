@@ -77,12 +77,13 @@ public static class InGameOverworldHelper {
         return orig(path, startPlaying);
     }
 
-    public static void OpenJournal(Player player, AreaKey area) {
+    public static void OpenJournal(Player player, AreaKey area, bool onlyDisc) {
         player.Drop();
 
         OuiHelper_EnterJournal.Start = true;
         JacopoHelperModule.OpenCustom = true;
         JacopoHelperModule.JournalArea = area;
+        JacopoHelperModule.OnlyDiscovered = onlyDisc;
 
         Open(player, out bool opened);
 

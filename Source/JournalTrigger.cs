@@ -7,13 +7,15 @@ namespace Celeste.Mod.JacopoHelper;
 [CustomEntity("JacopoHelper/JournalTrigger")]
 public class JournalTrigger : Trigger {
     private readonly TalkComponent talkComponent;
+    private readonly bool onlyDiscCPts;
 
     public JournalTrigger(EntityData data, Vector2 offset)
         : base(data, offset) {
+        onlyDiscCPts = data.Bool("onlyDiscoveredCheckpoints", true);
         Add(talkComponent = new TalkComponent(
             new Rectangle(0, 0, data.Width, data.Height),
             data.Nodes.Length != 0 ? (data.Nodes[0] - data.Position) : new Vector2(data.Width / 2f, data.Height / 2f),
-            player => InGameOverworldHelper.OpenJournal(player, SceneAs<Level>().Session.Area)
+            player => InGameOverworldHelper.OpenJournal(player, SceneAs<Level>().Session.Area, onlyDiscCPts)
         ) { PlayerMustBeFacing = false });
     }
 
