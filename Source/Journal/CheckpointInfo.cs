@@ -5,6 +5,7 @@ namespace Celeste.Mod.JacopoHelper;
 public class BerryInfo {
     public bool Collected;
     public bool Untracked;
+    public bool Ghost;
 }
 
 public class CheckpointInfo {

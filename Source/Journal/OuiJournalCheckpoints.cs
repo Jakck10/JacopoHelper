@@ -61,13 +61,25 @@ public class OuiJournalCheckpoints : OuiJournalPage {
         MTexture normal = GFX.Gui["collectables/strawberry"];
         MTexture untracked = GFX.Gui.Has("JacopoHelper/coreberry")
             ? GFX.Gui["JacopoHelper/coreberry"] : normal;
+        MTexture ghost = GFX.Gui.Has("JacopoHelper/ghostberry")
+            ? GFX.Gui["JacopoHelper/ghostberry"] : normal;
 
         float spacing = 53f;
         float startX = x - (cp.Berries.Count - 1) * spacing / 2f;
         for (int i = 0; i < cp.Berries.Count; i++) {
             BerryInfo b = cp.Berries[i];
-            Color c = b.Collected ? Color.White : Color.Black * 0.3f;
-            (b.Untracked ? untracked : normal).DrawCentered(new Vector2(startX + i * spacing, y + 25f), c, 0.5f);
+
+            MTexture tex;
+            Color c;
+            if (b.Ghost) {
+                tex = ghost;
+                c = Color.White;
+            } else {
+                tex = b.Untracked ? untracked : normal;
+                c = b.Collected ? Color.White : Color.Black * 0.3f;
+            }
+
+            tex.DrawCentered(new Vector2(startX + i * spacing, y + 25f), c, 0.5f);
         }
 
         Draw.SpriteBatch.End();
